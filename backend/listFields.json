@@ -1,0 +1,14 @@
+[
+  {
+    "id": "id_1",
+    "type": "login",
+    "fieldType": "string",
+    "description": "The user's login name"
+  },
+  {
+    "id": "id_3",
+    "type": "logout",
+    "fieldType": "string",
+    "description": "The user's logout name"
+  }
+]

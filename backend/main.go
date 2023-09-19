@@ -40,7 +40,7 @@ func startGin() {
 	//router.Use(ginBodyLogMiddleware)
 
 	router.GET("/listActivity", listActivity)
-	router.DELETE("/listFields", listFields)
+	router.GET("/listFields", listFields)
 	router.Run("localhost:8080")
 }
 
@@ -51,6 +51,13 @@ type Activity struct {
 
 type ActivityRequestBody struct {
 	Type string `json:"type"`
+}
+
+type activityFields struct {
+	ID          string `json:"id"`
+	Type        string `json:"type"`
+	FieldType   string `json:"fieldType"`
+	Description string `json:"description"`
 }
 
 func listActivity(ctx *gin.Context) {
@@ -91,5 +98,37 @@ func listActivity(ctx *gin.Context) {
 }
 
 func listFields(ctx *gin.Context) {
+	//// Sample JSON array data
+	//jsonData := `
+	//[
+	//	{
+	//		"name": "John",
+	//		"age": 30,
+	//		"city": "New York"
+	//	},
+	//	{
+	//		"name": "Alice",
+	//		"age": 25,
+	//		"city": "Los Angeles"
+	//	}
+	//]
+	//`
+
+	file, err := os.Open("listFields.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Create a JSON decoder
+	decoder := json.NewDecoder(file)
+	var activities []activityFields
+	err = decoder.Decode(&activities)
+	if err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return
+	}
+	ctx.JSON(http.StatusOK, activities)
 
 }
