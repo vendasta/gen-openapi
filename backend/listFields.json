@@ -3,12 +3,40 @@
     "id": "id_1",
     "type": "login",
     "fieldType": "string",
-    "description": "The user's login name"
+    "description": "The user's login name",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
   },
   {
     "id": "id_3",
     "type": "logout",
     "fieldType": "string",
-    "description": "The user's logout name"
+    "description": "The user's logout name",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
+  },
+  {
+    "id": "id_4",
+    "type": "count",
+    "fieldType": "int",
+    "description": "The user's count",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
+  },
+  {
+    "id": "id_5",
+    "type": "active",
+    "fieldType": "bool",
+    "description": "The user is active or not",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
   }
 ]

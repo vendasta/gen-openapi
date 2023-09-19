@@ -4,12 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -54,10 +56,16 @@ type ActivityRequestBody struct {
 }
 
 type activityFields struct {
-	ID          string `json:"id"`
-	Type        string `json:"type"`
-	FieldType   string `json:"fieldType"`
-	Description string `json:"description"`
+	ID          string   `json:"id"`
+	Type        string   `json:"type"`
+	FieldType   string   `json:"fieldType"`
+	Description string   `json:"description"`
+	Response    Response `json:"response"`
+}
+
+type Response struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
 }
 
 func listActivity(ctx *gin.Context) {
@@ -98,26 +106,20 @@ func listActivity(ctx *gin.Context) {
 }
 
 func listFields(ctx *gin.Context) {
-	//// Sample JSON array data
-	//jsonData := `
-	//[
-	//	{
-	//		"name": "John",
-	//		"age": 30,
-	//		"city": "New York"
-	//	},
-	//	{
-	//		"name": "Alice",
-	//		"age": 25,
-	//		"city": "Los Angeles"
-	//	}
-	//]
-	//`
 
+	json := jsonResp(ctx)
+
+	jsonToYaml(json)
+
+	//fmt.Println(string(yaml))
+
+}
+
+func jsonResp(ctx *gin.Context) []activityFields {
 	file, err := os.Open("listFields.json")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
-		return
+		return nil
 	}
 	defer file.Close()
 
@@ -127,8 +129,31 @@ func listFields(ctx *gin.Context) {
 	err = decoder.Decode(&activities)
 	if err != nil {
 		fmt.Println("Error decoding JSON:", err)
-		return
+		return nil
 	}
 	ctx.JSON(http.StatusOK, activities)
+	return activities
+}
 
+func jsonToYaml(data []activityFields) {
+
+	yamlFile, err := os.Create("output.yaml")
+	if err != nil {
+		log.Fatalf("Error creating YAML file: %v", err)
+	}
+	defer yamlFile.Close()
+
+	// Marshal the slice of maps into YAML format
+	yamlData, err := yaml.Marshal(data)
+	if err != nil {
+		log.Fatalf("Error marshaling to YAML: %v", err)
+	}
+
+	// Write the YAML data to the file
+	_, err = yamlFile.Write(yamlData)
+	if err != nil {
+		log.Fatalf("Error writing to YAML file: %v", err)
+	}
+
+	fmt.Println("YAML data has been written to output.yaml")
 }
