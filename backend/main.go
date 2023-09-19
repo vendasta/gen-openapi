@@ -1,8 +1,11 @@
-package backend
+package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -38,10 +41,35 @@ func startGin() {
 
 	router.GET("/listActivity", listActivity)
 	router.DELETE("/listFields", listFields)
+	router.Run("localhost:8080")
+}
+
+type Activity struct {
+	ID   string `json:"id"`
+	Type string `json:"type"`
 }
 
 func listActivity(ctx *gin.Context) {
+	file, err := os.Open("listActivity.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
 
+	// Create a JSON decoder
+	decoder := json.NewDecoder(file)
+
+	// Create a variable to hold the decoded data
+	var activities []Activity
+
+	// Use the decoder to unmarshal the JSON data into the variable
+	err = decoder.Decode(&activities)
+	if err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return
+	}
+	ctx.JSON(http.StatusOK, activities)
 }
 
 func listFields(ctx *gin.Context) {

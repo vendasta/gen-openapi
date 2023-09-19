@@ -1,0 +1,26 @@
+[
+  {
+    "id": "id_1",
+    "type": "login"
+  },
+  {
+    "id": "id_2",
+    "type": "login"
+  },
+  {
+    "id": "id_3",
+    "type": "logout"
+  },
+  {
+    "id": "id_4",
+    "type": "logout"
+  },
+  {
+    "id": "id_5",
+    "type": "report_clicked"
+  },
+  {
+    "id": "id_6",
+    "type": "report_clicked"
+  }
+]
