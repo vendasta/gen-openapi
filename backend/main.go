@@ -37,7 +37,7 @@ func startGin() {
 	router := gin.New()
 	router.Use(CORSMiddleware())
 
-	router.Use(ginBodyLogMiddleware)
+	//router.Use(ginBodyLogMiddleware)
 
 	router.GET("/listActivity", listActivity)
 	router.DELETE("/listFields", listFields)
@@ -49,7 +49,20 @@ type Activity struct {
 	Type string `json:"type"`
 }
 
+type ActivityRequestBody struct {
+	Type string `json:"type"`
+}
+
 func listActivity(ctx *gin.Context) {
+	var requestBody ActivityRequestBody
+	var response []Activity
+	if err := ctx.ShouldBindJSON(&requestBody); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	filterType := requestBody.Type
+
 	file, err := os.Open("listActivity.json")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -57,19 +70,24 @@ func listActivity(ctx *gin.Context) {
 	}
 	defer file.Close()
 
-	// Create a JSON decoder
 	decoder := json.NewDecoder(file)
-
-	// Create a variable to hold the decoded data
 	var activities []Activity
-
-	// Use the decoder to unmarshal the JSON data into the variable
 	err = decoder.Decode(&activities)
 	if err != nil {
 		fmt.Println("Error decoding JSON:", err)
 		return
 	}
-	ctx.JSON(http.StatusOK, activities)
+
+	for _, activity := range activities {
+		if activity.Type == filterType {
+			response = append(response, activity)
+		}
+
+		if activity.Type == "" {
+			response = append(response, activity)
+		}
+	}
+	ctx.JSON(http.StatusOK, response)
 }
 
 func listFields(ctx *gin.Context) {
