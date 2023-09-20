@@ -40,6 +40,7 @@ func startGin() {
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
+	router.StaticFS("/file", gin.Dir("static", false))
 	router.Use(CORSMiddleware())
 
 	//router.Use(ginBodyLogMiddleware)
