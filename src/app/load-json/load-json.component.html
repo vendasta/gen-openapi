@@ -1,6 +1,9 @@
 <p>&nbsp;&nbsp;API Response Editor<p>
 <br>
 
-<mat-form-field appearance="fill" class="custom-textarea">
-  <textarea matInput placeholder="Enter text"></textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<mat-form-field appearance="fill" >
+  <textarea matInput [rows]="30" [cols]="100" [(ngModel)]="fields" placeholder="Enter text"></textarea>
 </mat-form-field>
+
+<button mat-button (click)="saveFields()">Click Me</button>

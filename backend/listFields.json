@@ -1,1 +1,22 @@
-[{"id":"id_____1","type":"login_s","fieldType":"string","description":"The user's login name","response":{"code":200,"message":"success"}},{"id":"id_31","type":"logout_s","fieldType":"string","description":"The user's logout name","response":{"code":200,"message":"success"}}]
+[
+  {
+    "id": "id1",
+    "type": "login",
+    "fieldType": "login",
+    "description": "User logging in",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
+  },
+  {
+    "id": "id2",
+    "type": "logout",
+    "fieldType": "logout",
+    "description": "User logging out",
+    "response": {
+      "code": 200,
+      "message": "success"
+    }
+  }
+]

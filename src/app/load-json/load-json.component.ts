@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Editor } from 'ngx-editor';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-load-json',
@@ -7,9 +7,21 @@ import { Editor } from 'ngx-editor';
   styleUrls: ['./load-json.component.scss']
 })
 export class LoadJsonComponent {
+  fields = '';
 
+  constructor(private apiService: ApiService) {}
+  
   ngOnInit(): void {
-    
+    this.apiService.getListFields().subscribe((response) => {
+      this.fields = JSON.stringify(response, null, 2);
+    });
+  }
+
+  saveFields() {
+    console.log(this.fields)
+    this.apiService.saveFields(this.fields).subscribe((response: any) => {
+      console.log("SAVED")
+    });
   }
 
   ngOnDestroy(): void {
