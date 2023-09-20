@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoadDocComponent } from './load-doc/load-doc.component';
 import { LoadJsonComponent } from './load-json/load-json.component';
 
-const routes: Routes = [
+/*const routes: Routes = [
   { path: '', component: AppComponent, pathMatch: 'full' },
   {
     path: 'api-reference',
@@ -22,6 +22,12 @@ const routes: Routes = [
     component: LoadJsonComponent,
     children: [{ path: '**', component: LoadJsonComponent }],
   },
+];*/
+
+const routes: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'load-json', component: LoadJsonComponent },
+  { path: 'load-doc', component: LoadDocComponent },
 ];
 
 @NgModule({
