@@ -79,6 +79,14 @@ paths:
           name: logout
           description: User logging out
           required: true
+        - schema:
+            type: user_clicked
+            example: Bearer <Access Token>
+            pattern: ^Bearer\s\S+
+          in: header
+          name: clicked
+          description: user clicked
+          required: true
 
       tags:
         - Sales Contacts
