@@ -4,6 +4,7 @@ import { ApiReferenceComponent } from './api-reference/api-reference.component';
 import { AppComponent } from './app.component';
 import { LoadDocComponent } from './load-doc/load-doc.component';
 import { LoadJsonComponent } from './load-json/load-json.component';
+import { HomeComponent } from './home/home.component';
 
 /*const routes: Routes = [
   { path: '', component: AppComponent, pathMatch: 'full' },
@@ -25,7 +26,7 @@ import { LoadJsonComponent } from './load-json/load-json.component';
 ];*/
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: HomeComponent },
   { path: 'load-json', component: LoadJsonComponent },
   { path: 'load-doc', component: LoadDocComponent },
 ];
