@@ -44,6 +44,7 @@ func startGin() {
 
 	router.GET("/listActivity", listActivity)
 	router.GET("/listFields", listFields)
+	router.POST("/saveFields", saveFileds)
 	router.POST("/generateYaml", generateYaml)
 	router.Run("localhost:8080")
 }
@@ -178,6 +179,30 @@ func generateYamlData(ctx *gin.Context) ([]ActivityField, error) {
 	}
 	ctx.JSON(http.StatusOK, activities)
 	return activities, errr
+}
+
+func saveFileds(ctx *gin.Context) {
+	var activity []Activity
+
+	if err := ctx.ShouldBindJSON(&activity); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	jsonData, err := json.Marshal(activity)
+	if err != nil {
+		panic(err)
+	}
+
+	filePath := "listFields.json"
+
+	err = ioutil.WriteFile(filePath, jsonData, 0644)
+	if err != nil {
+		panic(err)
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Data inserted successfully"})
+
 }
 
 func HttpRequest(method string, url string) ([]byte, error) {
