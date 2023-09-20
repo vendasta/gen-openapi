@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/@stoplight/elements/styles.min.css"
+              "node_modules/@stoplight/elements/styles.min.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": [
               "node_modules/@stoplight/elements/web-components.min.js"
@@ -98,7 +99,8 @@
               "src/social.yaml"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": []
           }
