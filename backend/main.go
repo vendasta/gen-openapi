@@ -55,7 +55,7 @@ type ActivityRequestBody struct {
 	Type string `json:"type"`
 }
 
-type activityFields struct {
+type ActivityField struct {
 	ID          string   `json:"id"`
 	Type        string   `json:"type"`
 	FieldType   string   `json:"fieldType"`
@@ -66,6 +66,12 @@ type activityFields struct {
 type Response struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
+}
+
+type APIConfig struct {
+	Title          string
+	Version        string
+	ActivityFields []ActivityField
 }
 
 func listActivity(ctx *gin.Context) {
@@ -106,16 +112,12 @@ func listActivity(ctx *gin.Context) {
 }
 
 func listFields(ctx *gin.Context) {
-
-	json := jsonResp(ctx)
-
-	jsonToYaml(json)
-
-	//fmt.Println(string(yaml))
-
+	jsonResp(ctx)
+	//	json := jsonResp(ctx)
+	//jsonToYaml(json)
 }
 
-func jsonResp(ctx *gin.Context) []activityFields {
+func jsonResp(ctx *gin.Context) []ActivityField {
 	file, err := os.Open("listFields.json")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -125,7 +127,7 @@ func jsonResp(ctx *gin.Context) []activityFields {
 
 	// Create a JSON decoder
 	decoder := json.NewDecoder(file)
-	var activities []activityFields
+	var activities []ActivityField
 	err = decoder.Decode(&activities)
 	if err != nil {
 		fmt.Println("Error decoding JSON:", err)
@@ -135,7 +137,7 @@ func jsonResp(ctx *gin.Context) []activityFields {
 	return activities
 }
 
-func jsonToYaml(data []activityFields) {
+func jsonToYaml(data []ActivityField) {
 
 	yamlFile, err := os.Create("output.yaml")
 	if err != nil {

@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: List Fields API
+  version: 1.0.0
+paths:
+  /listFields:
+  {{range .}}   
+    get:
+      summary: List Fields
+      parameters:
+        - name: {{.id}}
+          in: query
+          description: "{{.description}}"
+          required: true
+          schema:
+            type: {{.fieldType}}
+      responses:
+        '200':
+          description: "{{.response.message}}"
+  {{end}}

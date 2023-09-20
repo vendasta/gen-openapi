@@ -18,25 +18,5 @@
       "code": 200,
       "message": "success"
     }
-  },
-  {
-    "id": "id_4",
-    "type": "count",
-    "fieldType": "int",
-    "description": "The user's count",
-    "response": {
-      "code": 200,
-      "message": "success"
-    }
-  },
-  {
-    "id": "id_5",
-    "type": "active",
-    "fieldType": "bool",
-    "description": "The user is active or not",
-    "response": {
-      "code": 200,
-      "message": "success"
-    }
   }
 ]
