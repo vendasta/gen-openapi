@@ -28,7 +28,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/platform.yaml"
+              "src/social.yaml"
             ],
             "styles": [
               "src/styles.scss",
@@ -94,7 +94,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/social.yaml"
             ],
             "styles": [
               "src/styles.scss"

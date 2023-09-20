@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ApiReferenceComponent } from './api-reference/api-reference.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule} from "@angular/material/button";
+import { LoadDocComponent } from './load-doc/load-doc.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
-    ApiReferenceComponent
+    ApiReferenceComponent,
+    LoadDocComponent
   ],
   imports: [
     BrowserModule,
