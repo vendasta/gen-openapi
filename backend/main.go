@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -169,16 +171,46 @@ func generateYaml(ctx *gin.Context) {
 }
 
 func generateYamlData(ctx *gin.Context) ([]ActivityField, error) {
-	resp, _ := HttpRequest("GET", "/generateYaml")
-	var activities []ActivityField
-	errr := json.Unmarshal(resp, &activities)
-
-	if errr != nil {
-		fmt.Println("Cant unmarshal the byte array")
-		return activities, nil
+	//resp, _ := HttpRequest("GET", "/generateYaml")
+	//var activities []ActivityField
+	//errr := json.Unmarshal(resp, &activities)
+	//
+	//if errr != nil {
+	//	fmt.Println("Cant unmarshal the byte array")
+	//	return activities, nil
+	//}
+	//ctx.JSON(http.StatusOK, activities)
+	//return activities, errr
+	templateFilePath := "template.yaml"
+	templateBytes, err := ioutil.ReadFile(templateFilePath)
+	if err != nil {
+		panic(err)
 	}
-	ctx.JSON(http.StatusOK, activities)
-	return activities, errr
+
+	templateStr := string(templateBytes)
+
+	t := template.New("yamlTemplate")
+	parsedTemplate, err := t.Parse(templateStr)
+	if err != nil {
+		panic(err)
+	}
+	values := jsonResp(ctx)
+
+	data := TemplateData{
+		ActivityField: values,
+	}
+	var populatedYAML bytes.Buffer
+	err = parsedTemplate.Execute(&populatedYAML, data)
+	if err != nil {
+		panic(err)
+	}
+
+	outputFilePath := "../src/output.yaml"
+	err = ioutil.WriteFile(outputFilePath, []byte(populatedYAML.String()), 0644)
+	if err != nil {
+		panic(err)
+	}
+	return values, err
 }
 
 func saveFileds(ctx *gin.Context) {
@@ -214,4 +246,8 @@ func HttpRequest(method string, url string) ([]byte, error) {
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
 	return body, nil
+}
+
+type TemplateData struct {
+	ActivityField []ActivityField
 }
