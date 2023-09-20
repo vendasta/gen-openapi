@@ -1,1 +1,1 @@
-[{"id":"id_____1","type":"login_s"},{"id":"id_31","type":"logout_s"}]
+[{"id":"id_____1","type":"login_s","fieldType":"string","description":"The user's login name","response":{"code":200,"message":"success"}},{"id":"id_31","type":"logout_s","fieldType":"string","description":"The user's logout name","response":{"code":200,"message":"success"}}]

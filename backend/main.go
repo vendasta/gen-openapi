@@ -182,7 +182,7 @@ func generateYamlData(ctx *gin.Context) ([]ActivityField, error) {
 }
 
 func saveFileds(ctx *gin.Context) {
-	var activity []Activity
+	var activity []ActivityField
 
 	if err := ctx.ShouldBindJSON(&activity); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
