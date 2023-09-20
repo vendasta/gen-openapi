@@ -18,4 +18,8 @@ export class ApiService {
   saveFields(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/saveFields`, data);
   }
+
+  generateYaml(): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/generateYaml`, {});
+  }
 }
