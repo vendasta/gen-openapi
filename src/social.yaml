@@ -64,22 +64,22 @@ paths:
                   $ref: '#/components/schemas/salesContacts'
       parameters:
         - schema:
-            type: string
+            type: login
             example: Bearer <Access Token>
             pattern: ^Bearer\s\S+
           in: header
-          name: Authorization
-          description: A Bearer access token to identify the user the app is acting on behalf of. See the Authorization guide for details.
+          name: login
+          description: User logging in
           required: true
         - schema:
-            type: string
-            default: application/vnd.api+json
-            enum:
-              - application/vnd.api+json
+            type: logout
+            example: Bearer <Access Token>
+            pattern: ^Bearer\s\S+
           in: header
-          name: Content-Type
+          name: logout
+          description: User logging out
           required: true
-          description: Indicates the format of the request body being sent. In most cases you will want `application/vnd.api+json`
+
       tags:
         - Sales Contacts
     options:
@@ -274,7 +274,7 @@ components:
                   readOnly: true
       required:
         - type
-    
+
       type: object
       x-examples:
         Partner Activatable Product Example:

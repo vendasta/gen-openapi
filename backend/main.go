@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -206,11 +207,12 @@ func generateYamlData(ctx *gin.Context) ([]ActivityField, error) {
 		panic(err)
 	}
 
-	outputFilePath := "../src/output.yaml"
+	outputFilePath := "output.yaml"
 	err = ioutil.WriteFile(outputFilePath, []byte(populatedYAML.String()), 0644)
 	if err != nil {
 		panic(err)
 	}
+	copyFile()
 	return values, err
 }
 
@@ -251,4 +253,35 @@ func HttpRequest(method string, url string) ([]byte, error) {
 
 type TemplateData struct {
 	ActivityField []ActivityField
+}
+
+func copyFile() {
+	// Source and destination file paths
+	sourceFilePath := "output.yaml"
+	destinationFilePath := "../src/social.yaml"
+
+	// Open the source file for reading
+	sourceFile, err := os.Open(sourceFilePath)
+	if err != nil {
+		fmt.Println("Error opening source file:", err)
+		return
+	}
+	defer sourceFile.Close()
+
+	// Create or open the destination file for writing
+	destinationFile, err := os.Create(destinationFilePath)
+	if err != nil {
+		fmt.Println("Error creating destination file:", err)
+		return
+	}
+	defer destinationFile.Close()
+
+	// Copy the content from source to destination
+	_, err = io.Copy(destinationFile, sourceFile)
+	if err != nil {
+		fmt.Println("Error copying file:", err)
+		return
+	}
+
+	fmt.Println("File copied successfully!")
 }
