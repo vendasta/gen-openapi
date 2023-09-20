@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -43,6 +44,7 @@ func startGin() {
 
 	router.GET("/listActivity", listActivity)
 	router.GET("/listFields", listFields)
+	router.POST("/generateYaml", generateYaml)
 	router.Run("localhost:8080")
 }
 
@@ -158,4 +160,33 @@ func jsonToYaml(data []ActivityField) {
 	}
 
 	fmt.Println("YAML data has been written to output.yaml")
+}
+
+func generateYaml(ctx *gin.Context) {
+	ymalData, _ := generateYamlData(ctx)
+	fmt.Println(ymalData)
+}
+
+func generateYamlData(ctx *gin.Context) ([]ActivityField, error) {
+	resp, _ := HttpRequest("GET", "/generateYaml")
+	var activities []ActivityField
+	errr := json.Unmarshal(resp, &activities)
+
+	if errr != nil {
+		fmt.Println("Cant unmarshal the byte array")
+		return activities, nil
+	}
+	ctx.JSON(http.StatusOK, activities)
+	return activities, errr
+}
+
+func HttpRequest(method string, url string) ([]byte, error) {
+	req, _ := http.NewRequest(method, url, nil)
+	log.Println("URL:", url)
+	req.Header.Add("Content-Type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+	return body, nil
 }
