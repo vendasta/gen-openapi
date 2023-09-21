@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'testyaml';
+  title = 'Dynamic YAML';
   ngOnInit(): void {
-    //localStorage.setItem('TryIt_securitySchemeValues', JSON.stringify({'OAuth2Demo': 'Bearer AwesomeDemo', 'OAuth2Prod': 'Bearer AwesomeProd'}))
   }
 }

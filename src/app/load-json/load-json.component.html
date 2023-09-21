@@ -1,10 +1,11 @@
 <br/>
 <p>&nbsp;&nbsp;API Response Editor<p>
-<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;
-<mat-form-field appearance="fill" >
-  <textarea matInput [rows]="30" [cols]="100" [(ngModel)]="fields" placeholder="Enter text"></textarea>
+&nbsp;&nbsp;&nbsp;
+<div>
+<mat-form-field apperance="fill" class="textarea">
+  <textarea matInput [rows]="25" [cols]="100" [(ngModel)]="fields" placeholder="Enter text"></textarea>
 </mat-form-field>
+</div>
 
 <button mat-stroked-button color="primary" (click)="saveFields()">Save</button>
