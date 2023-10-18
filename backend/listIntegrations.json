@@ -1,0 +1,32 @@
+[
+  {
+    "cardName": "Salesforce",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "Connect your Salesforce account to automatically sync your data with the platform"
+  },
+  {
+    "cardName": "Zapier",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "Integrate with Zapier to unlock powerful workflow automations with thousands of apps"
+  },
+  {
+    "cardName": "Google Contacts",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "Sync your Google Contacts with the platform"
+  },
+  {
+    "cardName": "Fuze",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "Connect your existing Fuze account to automatically log your salespeople's calls"
+  },
+  {
+    "cardName": "Freshdesk",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "View your freshdesk tickets directly in the platform"
+  },
+  {
+    "cardName": "Facebooks Lead Ads",
+    "cardLogo": "www.logo.com",
+    "cardDescription": "Import leads to the Vendasta platform, create accounts, and assign them to your sales team"
+  }
+]
