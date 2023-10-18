@@ -50,6 +50,7 @@ func startGin() {
 	router.GET("/listFields", listFields)
 	router.POST("/saveFields", saveFileds)
 	router.POST("/generateYaml", generateYaml)
+	router.GET("/listIntegrations", listIntegrations)
 	router.Run("localhost:8080")
 }
 
@@ -68,6 +69,12 @@ type ActivityField struct {
 	FieldType   string   `json:"fieldType"`
 	Description string   `json:"description"`
 	Response    Response `json:"response"`
+}
+
+type IntegrationField struct {
+	CardName        string `json:"cardName"`
+	CardLogo        string `json:"cardLogo"`
+	CardDescription string `json:"cardDescription"`
 }
 
 type Response struct {
@@ -122,6 +129,30 @@ func listFields(ctx *gin.Context) {
 	jsonResp(ctx)
 	//	json := jsonResp(ctx)
 	//jsonToYaml(json)
+}
+
+func listIntegrations(ctx *gin.Context) {
+	jsonRespIntegrations(ctx)
+}
+
+func jsonRespIntegrations(ctx *gin.Context) []IntegrationField {
+	file, err := os.Open("listIntegrations.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return nil
+	}
+	defer file.Close()
+
+	// Create a JSON decoder
+	decoder := json.NewDecoder(file)
+	var integrations []IntegrationField
+	err = decoder.Decode(&integrations)
+	if err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return nil
+	}
+	ctx.JSON(http.StatusOK, integrations)
+	return integrations
 }
 
 func jsonResp(ctx *gin.Context) []ActivityField {
