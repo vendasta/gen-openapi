@@ -3,36 +3,42 @@
     "cardId": "1",
     "cardName": "Salesforce",
     "cardLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/2560px-Salesforce.com_logo.svg.png",
-    "cardDescription": "Connect your Salesforce account to automatically sync your data with the platform"
+    "cardDescription": "Connect your Salesforce account to automatically sync your data with the platform",
+    "connected": "true"
   },
   {
     "cardId": "2",
     "cardName": "Zapier",
     "cardLogo": "https://www.svgrepo.com/show/354596/zapier-icon.svg",
-    "cardDescription": "Integrate with Zapier to unlock powerful workflow automations with thousands of apps"
+    "cardDescription": "Integrate with Zapier to unlock powerful workflow automations with thousands of apps",
+    "connected": "true"
   },
   {
     "cardId": "3",
     "cardName": "Google Contacts",
     "cardLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Google_Contacts_icon.svg/512px-Google_Contacts_icon.svg.png",
-    "cardDescription": "Sync your Google Contacts with the platform"
+    "cardDescription": "Sync your Google Contacts with the platform",
+    "connected": "false"
   },
   {
     "cardId": "4",
     "cardName": "Fuze",
     "cardLogo": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/3cc253c7-70da-4a6b-b4db-2134e3ad8b00.png?w=100&q=50",
-    "cardDescription": "Connect your existing Fuze account to automatically log your salespeople's calls"
+    "cardDescription": "Connect your existing Fuze account to automatically log your salespeople's calls",
+    "connected": "false"
   },
   {
     "cardId": "5",
     "cardName": "Freshdesk",
     "cardLogo": "https://logowik.com/content/uploads/images/freshdesk9456.jpg",
-    "cardDescription": "View your freshdesk tickets directly in the platform"
+    "cardDescription": "View your freshdesk tickets directly in the platform",
+    "connected": "false"
   },
   {
     "cardId": "6",
     "cardName": "Facebooks Lead Ads",
     "cardLogo": "https://imagedelivery.net/5MYSbk45M80qAwecrlKzdQ/92fd2c63-9140-4bb6-ee02-bc296fc9d900/preview",
-    "cardDescription": "Import leads to the Vendasta platform, create accounts, and assign them to your sales team"
+    "cardDescription": "Import leads to the Vendasta platform, create accounts, and assign them to your sales team",
+    "connected": "true"
   }
 ]

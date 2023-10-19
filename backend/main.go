@@ -52,6 +52,7 @@ func startGin() {
 	router.POST("/generateYaml", generateYaml)
 	router.GET("/listIntegrations", listIntegrations)
 	router.GET("/viewIntegration", viewIntegrations)
+	router.GET("/connectedCards", connectedCards)
 	router.Run("localhost:8080")
 }
 
@@ -77,6 +78,7 @@ type IntegrationField struct {
 	CardName        string `json:"cardName"`
 	CardLogo        string `json:"cardLogo"`
 	CardDescription string `json:"cardDescription"`
+	Connected       string `json:"connected"`
 }
 
 type Response struct {
@@ -135,6 +137,37 @@ func listFields(ctx *gin.Context) {
 
 func listIntegrations(ctx *gin.Context) {
 	jsonRespIntegrations(ctx)
+}
+
+func connectedCards(ctx *gin.Context) {
+	jsonRespConnectedCards(ctx)
+}
+
+func jsonRespConnectedCards(ctx *gin.Context) []IntegrationField {
+	file, err := os.Open("listIntegrations.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return nil
+	}
+	defer file.Close()
+
+	// Create a JSON decoder
+	decoder := json.NewDecoder(file)
+	var integrations []IntegrationField
+	err = decoder.Decode(&integrations)
+	if err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return nil
+	}
+	var int []IntegrationField
+	for _, integration := range integrations {
+		if integration.Connected == "true" {
+
+			int = append(int, integration)
+		}
+	}
+	ctx.JSON(http.StatusOK, int)
+	return int
 }
 
 func viewIntegrations(ctx *gin.Context) {
